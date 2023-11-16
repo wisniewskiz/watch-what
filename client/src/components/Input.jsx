@@ -1,8 +1,14 @@
-import React from 'react'
-import './Input.css';
+import React from "react";
+import "./Input.css";
 
-export default function Input({ name, className, placeholder}) {
+export default function Input({ name, className, placeholder, onChange }) {
   return (
-    <input type="text" name={name} className={className} placeholder={placeholder}/>
-  )
+    <input
+      type="text"
+      name={name}
+      className={className}
+      placeholder={placeholder}
+      onChange={ onChange }
+    />
+  );
 }

@@ -7,8 +7,9 @@ export default function MovieList() {
 
   useEffect(() => {
     const getMovies = async () => {
-      const data = await fetch("http://localhost:3000/api");
+      const data = await fetch("http://127.0.0.1:3000/api");
       const movies = await data.json();
+      console.log(movies);
       setData((currentData) => (currentData = movies));
     };
     getMovies();
@@ -16,7 +17,7 @@ export default function MovieList() {
   return (
     <section>
       <div className="movies__container">
-        <MovieCard movieData={data[0]} />
+        {/* <MovieCard movieData={data[0]} /> */}
       </div>
     </section>
   );

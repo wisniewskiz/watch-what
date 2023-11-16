@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const Movie = require("../models/movie");
+const bodyParser = require("body-parser");
+
 
 router.get("/api", async (req, res) => {
-  // res.setHeader({'Content-Type': 'application/json'});
   const movies = await Movie.find({});
-  res.json(movies);
+  res.send(movies);
 });
 
-router.post("", async (req, res) => {
-  const movie = new Movie(req.body);
-  await movie.save();
-  res.redirect("/");
+router.post("/api", async (req, res) => {
+  const movie = await new Movie(req.body);
+  const newMovie = await movie.save();
+  console.log(newMovie);
 });
 
 module.exports = router;
