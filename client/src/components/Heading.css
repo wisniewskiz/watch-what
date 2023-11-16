@@ -1,0 +1,43 @@
+header {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.heading__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 80rem;
+}
+
+.heading__title {
+    color: #F6F6F6;
+font-family: Koulen, sans-serif;
+font-size: 2rem;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.heading__filter {
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.heading__filter--option {
+    color: #A6A6A6;
+    font-family: Koulen, sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.04rem;
+}
+
+.active {
+    color: #F6F6F6;
+    border-bottom: 4px solid #f6f6f6;
+}
