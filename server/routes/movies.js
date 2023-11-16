@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Movie = require("../models/movie");
 
-router.get("", async (req, res) => {
+router.get("/api", async (req, res) => {
+  // res.setHeader({'Content-Type': 'application/json'});
   const movies = await Movie.find({});
-  res.send(movies);
+  res.json(movies);
 });
 
 router.post("", async (req, res) => {
