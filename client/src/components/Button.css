@@ -1,0 +1,26 @@
+button {
+  display: flex;
+  padding: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  background: #a6a6a6;
+  color: #f6f6f6;
+  border: none;
+  outline: none;
+  transition: background 0.1s ease-in;
+}
+
+button:hover {
+  background: #1e1e1e;
+}
+
+.navigation__button {
+  font-family: Koulen, sans-serif;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.035rem;
+}

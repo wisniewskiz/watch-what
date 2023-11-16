@@ -1,0 +1,30 @@
+nav {
+  height: 5.5rem;
+  background-color: #262626;
+  display: flex;
+  justify-content: center;
+}
+
+.nav__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 80rem;
+}
+
+.logo {
+  color: #f6f6f6;
+  font-family: Koulen, sans-serif;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.12rem;
+}
+
+.nav__form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
