@@ -46,18 +46,17 @@ function Provider({ children }) {
     changeWatched: async(id) => {
         const settings = {
             method: "PUT",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            // mode: "no-cors",
-            body: JSON.stringify(id),
           };
           try {
             await fetch(`http://127.0.0.1:3000/api/${id}`, settings);
           } catch (error) {
             console.log(error)
           }
+    }, 
+
+    removeWatched: () => {
+        setMovies((currentMovies) => currentMovies.filter((movie) => movie.watched != true));
+        console.log(movies);
     }
   };
   return (

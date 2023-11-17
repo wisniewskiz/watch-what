@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Movie = require("../models/movie");
-const bodyParser = require("body-parser");
 
 
 router.get("/api", async (req, res) => {

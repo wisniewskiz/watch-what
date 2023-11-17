@@ -8,7 +8,7 @@ export default function MovieList() {
 
   useEffect(() => {
     updateMovies();
-  }, [movies]);
+  }, []);
   const renderMovies = movies && movies.map((movie) => {return <MovieCard movieData={movie} key={movie._id} id={movie._id}/>});
   return (
     <section>
