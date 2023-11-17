@@ -9,12 +9,14 @@ export default function MovieList() {
   useEffect(() => {
     updateMovies();
   }, []);
-  const renderMovies = movies && movies.map((movie) => {return <MovieCard movieData={movie} key={movie._id} id={movie._id}/>});
+  const renderMovies =
+    movies &&
+    movies.map((movie) => {
+      return <MovieCard movieData={movie} key={movie._id} id={movie._id} isWatched={movie.watched} />;
+    });
   return (
     <section>
-      <div className="movies__container">
-        {renderMovies}
-      </div>
+      <div className="movies__container">{renderMovies}</div>
     </section>
   );
 }

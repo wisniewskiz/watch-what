@@ -41,6 +41,7 @@ function Provider({ children }) {
       } catch (error) {
         console.log(error);
       }
+      updateMovies();
     },
 
     changeWatched: async(id) => {
@@ -54,9 +55,8 @@ function Provider({ children }) {
           }
     }, 
 
-    removeWatched: () => {
+    filterWatched: () => {
         setMovies((currentMovies) => currentMovies.filter((movie) => movie.watched != true));
-        console.log(movies);
     }
   };
   return (

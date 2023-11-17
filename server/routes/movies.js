@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Movie = require("../models/movie");
-
+const movie = require("../models/movie");
 
 router.get("/api", async (req, res) => {
   const movies = await Movie.find({});
@@ -15,9 +15,10 @@ router.post("/api", async (req, res) => {
 });
 
 router.put("/api/:id", async (req, res) => {
-  const {id} = req.params;
-  await Movie.findByIdAndUpdate(id, {watched : true });
-  console.log(id);
+  const { id } = req.params;
+  const movie = await Movie.findById(id);
+  movie.watched = !movie.watched;
+  await movie.save();
 });
 
 module.exports = router;

@@ -4,7 +4,7 @@ import className from 'classnames';
 import './Heading.css';
 
 export default function Heading() {
-  const {movies, removeWatched, updateMovies} = useContext(MoviesContext);
+  const {movies, filterWatched, updateMovies} = useContext(MoviesContext);
   const [active, setActive] = useState('all');
 
   const allClassName = className('heading__filter--option', 
@@ -16,13 +16,12 @@ export default function Heading() {
 
   const handleFilter = (event) => {
     setActive('filter');
-    removeWatched();
+    filterWatched();
   }
 
   const handleAll = (event) => {
     setActive('all');
     updateMovies();
-
     
   }
   return (
