@@ -1,7 +1,7 @@
 import React from "react";
 import "./Input.css";
 
-export default function Input({ name, className, placeholder, onChange }) {
+export default function Input({ name, className, placeholder, onChange, onSubmit }) {
   return (
     <input
       type="text"

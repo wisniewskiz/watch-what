@@ -7,7 +7,8 @@ section {
 .movies__container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1rem;
     align-items: center;
     width: 100%;
     max-width: 80rem;

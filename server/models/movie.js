@@ -18,9 +18,17 @@ const MovieSchema = new Schema({
     type: String,
     required: true
   },
+  genre: {
+    type: String, 
+    required: true
+  },
   tags: [{
     type: String
-  }]
+  }],
+  watched: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = mongoose.model("Movie", MovieSchema);
