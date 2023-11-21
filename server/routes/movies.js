@@ -25,4 +25,9 @@ router.put("/api/:id", async (req, res) => {
   await movie.save();
 });
 
+router.delete("/api/:id", async (req, res) => {
+  const { id } = req.params;
+  await Movie.findByIdAndDelete(id);
+});
+
 module.exports = router;

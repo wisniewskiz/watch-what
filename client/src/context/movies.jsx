@@ -55,6 +55,19 @@ function Provider({ children }) {
       }
     },
 
+    deleteMovie: async (id) => {
+      const filtered = movies.filter((movie) => movie._id != id);
+      setMovies((currentMovies) => (currentMovies = filtered));
+      const settings = {
+        method: "DELETE"
+      }
+      try {
+        await fetch(`http://127.0.0.1:3000/api/${id}`, settings)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     changeWatched: async (id) => {
       const settings = {
         method: "PUT",
@@ -63,7 +76,6 @@ function Provider({ children }) {
         movies.map((movie) => {
           movie._id == id && (movie.watched = !movie.watched);
         });
-        setMovies((currentMovies) => (currentMovies = movies));
         await fetch(`http://127.0.0.1:3000/api/${id}`, settings);
       } catch (error) {
         console.log(error);
@@ -71,7 +83,6 @@ function Provider({ children }) {
     },
 
     filterWatched: () => {
-      console.log(movies);
       const filtered = movies.filter((movie) => movie.watched === false);
       setMovies((currentMovies) => (currentMovies = filtered));
     },
