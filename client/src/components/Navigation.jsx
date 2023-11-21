@@ -5,7 +5,7 @@ import Input from "./Input";
 import Button from "./Button";
 
 export default function Navigation() {
-  const { movies, addMovie } = useContext(MoviesContext);
+  const { movies, setMovies, addMovie } = useContext(MoviesContext);
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");
 

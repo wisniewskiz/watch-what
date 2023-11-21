@@ -10,8 +10,8 @@ function Provider({ children }) {
 
     updateMovies: async () => {
       const movieList = await fetch("http://127.0.0.1:3000/api");
-      const movies = await movieList.json();
-      setMovies((currentMovies) => (currentMovies = movies));
+      const moviesData = await movieList.json();
+      setMovies((currentMovies) => (currentMovies = moviesData));
     },
 
     addMovie: async (event, title, tags) => {
@@ -25,7 +25,6 @@ function Provider({ children }) {
         poster: data.Poster,
         synopsis: data.Plot,
         genre: data.Genre,
-        tags: tags
       };
       const settings = {
         method: "POST",
@@ -36,28 +35,36 @@ function Provider({ children }) {
         body: JSON.stringify(newMovie),
       };
       try {
-        await fetch("http://127.0.0.1:3000/api", settings);
-        updateMovies();
+        await fetch("http://127.0.0.1:3000/api", settings)
+          .then((response) => response.json())
+          .then((data) => {
+            newMovie._id = data._id;
+          });
+        setMovies((currentMovies) => (currentMovies = [...movies, newMovie]));
       } catch (error) {
         console.log(error);
       }
-      updateMovies();
     },
 
-    changeWatched: async(id) => {
-        const settings = {
-            method: "PUT",
-          };
-          try {
-            await fetch(`http://127.0.0.1:3000/api/${id}`, settings);
-          } catch (error) {
-            console.log(error)
-          }
-    }, 
+    changeWatched: async (id) => {
+      const settings = {
+        method: "PUT",
+      };
+      try {
+          movies.map((movie) => {
+          movie._id == id && (movie.watched = !movie.watched);
+        });
+        setMovies((currentMovies) => (currentMovies = movies));
+        await fetch(`http://127.0.0.1:3000/api/${id}`, settings);
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     filterWatched: () => {
-        setMovies((currentMovies) => currentMovies.filter((movie) => movie.watched != true));
-    }
+      const filtered = movies.filter((movie) => movie.watched === false);
+      setMovies((currentMovies) => (currentMovies = filtered));
+    },
   };
   return (
     <MoviesContext.Provider value={moviesState}>

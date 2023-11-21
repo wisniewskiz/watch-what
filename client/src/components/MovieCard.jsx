@@ -9,19 +9,21 @@ export default function MovieCard({ movieData, id, isWatched }) {
   const watchHandler = (event) => {
     const id = event.target.id;
     changeWatched(id);
+    setWatched((current) => current=!watched);
   }
-
+  
   const unwatchHandler = (event) => {
     const id = event.target.id;
     changeWatched(id);
+    setWatched((current) => current=!watched);
   }
 
 const checkWatchStatus = () => {
-  if(isWatched) {
+  if(watched) {
     return (
       <div className="card__action--link" id={id} onClick={unwatchHandler}>Unwatch this movie</div>
     )
-  } else if(!isWatched) {
+  } else if(!watched) {
     return (
       <div className="card__action--link" onClick={watchHandler} id={id}>Add to Watched List</div>
     )

@@ -10,8 +10,8 @@ router.get("/api", async (req, res) => {
 
 router.post("/api", async (req, res) => {
   const movie = await new Movie(req.body);
-  const newMovie = await movie.save();
-  console.log(newMovie);
+  await movie.save();
+  res.json(movie);
 });
 
 router.put("/api/:id", async (req, res) => {

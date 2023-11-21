@@ -7,12 +7,22 @@ export default function MovieList() {
   const { movies, updateMovies } = useContext(MoviesContext);
 
   useEffect(() => {
-    updateMovies();
-  }, []);
+    if (!movies) {
+      updateMovies();
+    } 
+  }, [movies]);
   const renderMovies =
     movies &&
     movies.map((movie) => {
-      return <MovieCard movieData={movie} key={movie._id} id={movie._id} isWatched={movie.watched} />;
+      // console.log(movie);
+      return (
+        <MovieCard
+          movieData={movie}
+          key={movie._id}
+          id={movie._id}
+          isWatched={movie.watched}
+        />
+      );
     });
   return (
     <section>
