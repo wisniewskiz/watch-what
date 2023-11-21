@@ -7,18 +7,13 @@ import Button from "./Button";
 export default function Navigation() {
   const { addMovie } = useContext(MoviesContext);
   const [title, setTitle] = useState("");
-  const [tags, setTags] = useState("");
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
-  const handleTagsChange = (event) => {
-    setTags(event.target.value);
-  };
   const handleFormSubmit = (event) => {
-    addMovie(event, title, tags);
+    addMovie(event, title);
     setTitle("");
-    setTags("");
   };
 
   return (
@@ -32,13 +27,6 @@ export default function Navigation() {
             placeholder="Movie Title"
             onChange={handleTitleChange}
             value={title}
-          />
-          <Input
-            name="title"
-            className="navigation__input"
-            placeholder="tags (optional)"
-            onChange={handleTagsChange}
-            value={tags}
           />
           <Button className="navigation__button">Add Movie</Button>
         </form>

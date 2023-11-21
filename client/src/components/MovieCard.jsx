@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import MoviesContext from "../context/movies";
 import("./MovieCard.css");
 
-export default function MovieCard({ movieData, id, isWatched }) {
-  const { movies, changeWatched, deleteMovie } = useContext(MoviesContext);
+export default function MovieCard({ movieData, id, isWatched, isVisible }) {
+  const { changeWatched, deleteMovie } = useContext(MoviesContext);
   const [watched, setWatched] = useState(isWatched);
 
   const watchHandler = (event) => {
@@ -19,9 +19,8 @@ export default function MovieCard({ movieData, id, isWatched }) {
   };
 
   const deleteHandler = (event) => {
-    console.log(event.target.id);
     deleteMovie(event.target.id);
-  }
+  };
 
   const checkWatchStatus = () => {
     if (watched) {
@@ -40,44 +39,48 @@ export default function MovieCard({ movieData, id, isWatched }) {
   };
 
   const renderTags = (movieData) => {
-    if(movieData.tags != "") {
-      return ( 
+    if (movieData.tags != "") {
+      return (
         <div className="tags">
-        <span className="footer__title">Tags: </span>
-        {movieData.tags}
-      </div>
-      )
+          <span className="footer__title">Tags: </span>
+          {movieData.tags}
+        </div>
+      );
     }
-  }
+  };
 
   return (
     <div className="card">
-      <div className="card__body">
-        <div
-          className="card__image"
-        >
-          <img src={movieData.poster} alt={`poster for ${movieData.title}`} className="cardPoster"/>
-        </div>
-        <div className="card__data">
-          <div className="card__data--main">
-            <span className="title">
-              {movieData.title}, {movieData.year}
-            </span>
-            <p className="synopsis">{movieData.synopsis}</p>
+        <div className="card__body">
+          <div className="card__image">
+            <img
+              src={movieData.poster}
+              alt={`poster for ${movieData.title}`}
+              className="cardPoster"
+            />
           </div>
-          <div className="card__data--footer">
-            <div className="genre">
-              <span className="footer__title">Genre: </span>
-              {movieData.genre}
+          <div className="card__data">
+            <div className="card__data--main">
+              <span className="title">
+                {movieData.title}, {movieData.year}
+              </span>
+              <p className="synopsis">{movieData.synopsis}</p>
             </div>
+            <div className="card__data--footer">
+              <div className="genre">
+                <span className="footer__title">Genre: </span>
+                {movieData.genre}
+              </div>
               {renderTags(movieData)}
+            </div>
           </div>
+        </div>
+        <div className="card__action">
+          <div className="card__action--link" id={id} onClick={deleteHandler}>
+            Delete Movie
+          </div>
+          {checkWatchStatus()}
         </div>
       </div>
-      <div className="card__action">
-        <div className="card__action--link" id={id} onClick={deleteHandler}>Delete Movie</div>
-        {checkWatchStatus()}
-        </div>
-    </div>
   );
 }

@@ -28,6 +28,10 @@ const MovieSchema = new Schema({
   watched: {
     type: Boolean,
     default: false
+  },
+  isVisible: {
+    type: Boolean,
+    default: true
   }
 });
 

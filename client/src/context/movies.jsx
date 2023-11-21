@@ -30,8 +30,6 @@ function Provider({ children }) {
           poster: data.Poster,
           synopsis: data.Plot,
           genre: data.Genre,
-          watched: false,
-          tags,
         };
         const settings = {
           method: "POST",

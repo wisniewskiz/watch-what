@@ -5,6 +5,6 @@ to do
 [] - fix styling of cards 
 [] - filter by tags?
 [] - edit tags?
-[] - animations 
+[] - animations ? look into other libraries 
 [] - branding and landing 
 [] - finish writing out readme 
