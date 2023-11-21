@@ -4,9 +4,10 @@ const MoviesContext = createContext();
 
 function Provider({ children }) {
   const [movies, setMovies] = useState("");
-
+  const [errorFlash, setErrorFlash] = useState(false);
   const moviesState = {
     movies,
+    errorFlash,
 
     updateMovies: async () => {
       const movieList = await fetch("http://127.0.0.1:3000/api");
@@ -19,30 +20,38 @@ function Provider({ children }) {
       const apiUrl = "http://www.omdbapi.com/?apikey=cd9a8baf&t=";
       const request = await fetch(`${apiUrl}${title}`);
       const data = await request.json();
-      const newMovie = {
-        title: data.Title,
-        year: data.Year,
-        poster: data.Poster,
-        synopsis: data.Plot,
-        genre: data.Genre,
-      };
-      const settings = {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newMovie),
-      };
-      try {
-        await fetch("http://127.0.0.1:3000/api", settings)
-          .then((response) => response.json())
-          .then((data) => {
-            newMovie._id = data._id;
-          });
-        setMovies((currentMovies) => (currentMovies = [...movies, newMovie]));
-      } catch (error) {
-        console.log(error);
+      if (data.Response == "False") {
+          setErrorFlash(true);
+          setTimeout(() => {setErrorFlash(false)}, 5000);
+      } else {
+        const newMovie = {
+          title: data.Title,
+          year: data.Year,
+          poster: data.Poster,
+          synopsis: data.Plot,
+          genre: data.Genre,
+          watched: false,
+          tags,
+        };
+        const settings = {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newMovie),
+        };
+        try {
+          await fetch("http://127.0.0.1:3000/api", settings)
+            .then((response) => response.json())
+            .then((data) => {
+              newMovie._id = data._id;
+            });
+          setMovies((currentMovies) => (currentMovies = [...movies, newMovie]));
+        } catch (error) {
+          console.log("something happened");
+          setErrorFlash(true);
+        }
       }
     },
 
@@ -51,7 +60,7 @@ function Provider({ children }) {
         method: "PUT",
       };
       try {
-          movies.map((movie) => {
+        movies.map((movie) => {
           movie._id == id && (movie.watched = !movie.watched);
         });
         setMovies((currentMovies) => (currentMovies = movies));
@@ -62,6 +71,7 @@ function Provider({ children }) {
     },
 
     filterWatched: () => {
+      console.log(movies);
       const filtered = movies.filter((movie) => movie.watched === false);
       setMovies((currentMovies) => (currentMovies = filtered));
     },

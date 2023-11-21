@@ -5,7 +5,7 @@ import Input from "./Input";
 import Button from "./Button";
 
 export default function Navigation() {
-  const { movies, setMovies, addMovie } = useContext(MoviesContext);
+  const { addMovie } = useContext(MoviesContext);
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");
 
@@ -16,7 +16,7 @@ export default function Navigation() {
     setTags(event.target.value);
   };
   const handleFormSubmit = (event) => {
-    addMovie(event, title, tags, setTitle, setTags);
+    addMovie(event, title, tags);
     setTitle("");
     setTags("");
   };

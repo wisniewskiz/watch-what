@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Movie = require("../models/movie");
-const movie = require("../models/movie");
 
 router.get("/api", async (req, res) => {
   const movies = await Movie.find({});
@@ -9,9 +8,14 @@ router.get("/api", async (req, res) => {
 });
 
 router.post("/api", async (req, res) => {
-  const movie = await new Movie(req.body);
-  await movie.save();
-  res.json(movie);
+  const movie = new Movie(req.body);
+  try {
+    await movie.save();
+    res.json(movie);
+  } catch (error) {
+    console.log(error);
+    res.json(error);
+  }
 });
 
 router.put("/api/:id", async (req, res) => {
